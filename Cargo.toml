@@ -2,17 +2,48 @@
 name = "lancer-strix"
 version = "0.1.0"
 edition = "2021"
-description = "Rust clone of strix — part of the Lancer bug bounty toolkit"
+description = "Rust orchestration layer around Strix — part of the Lancer bug bounty toolkit"
 authors = ["NHTanvir <naymulhasantanvir10@gmail.com>"]
 license = "MIT"
 repository = "https://github.com/NHTanvir/lancer-strix"
 
 [dependencies]
+# CLI + async runtime
 clap = { version = "4", features = ["derive"] }
 tokio = { version = "1", features = ["full"] }
 anyhow = "1"
+thiserror = "1"
+
+# Logging / tracing
 tracing = "0.1"
-tracing-subscriber = "0.3"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+
+# Docker SDK (Week 1 — container orchestration)
+bollard = "0.17"
+
+# Serialization (findings, telemetry, skills config)
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+# SQLite findings store (Week 7-8)
+rusqlite = { version = "0.31", features = ["bundled"] }
+
+# Timestamps and UUIDs
+chrono = { version = "0.4", features = ["serde"] }
+uuid = { version = "1", features = ["v4"] }
+
+# File watching — JSONL trace consumer (Week 3)
+notify = "6"
+
+# HTTP client — Lancer API, re-validation (Week 2, 8)
+reqwest = { version = "0.12", features = ["json"] }
+
+# Async stream utilities
+tokio-stream = "0.1"
+futures-util = "0.3"
+
+# URL parsing
+url = "2"
 
 [profile.release]
 opt-level = 3
